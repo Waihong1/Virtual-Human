@@ -2,10 +2,18 @@ import pandas as pd
 import numpy as np
 import h2o
 from h2o.automl import H2OAutoML
+import os
 
 h2o.init()
 
-df = pd.read_csv("C:\\Users\\wai25\\OneDrive\\Desktop\\Periode 3\\tings\\Virtual folder\\Virtual-Human\\user_avatar_choices.csv", delimiter=',')
+# Get the current script's directory (this will work even if cloned)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the relative path to the CSV file
+csv_path = os.path.join(script_dir, 'user_avatar_choices.csv')
+
+# Read the CSV file using the dynamic path
+df = pd.read_csv(csv_path)
 
 df = pd.get_dummies(df, columns=["user_gender", "user_skin_tone", "question_id"])
 
